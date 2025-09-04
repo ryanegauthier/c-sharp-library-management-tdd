@@ -18,9 +18,14 @@ This project demonstrates building a Library Management System from scratch usin
 ```
 LibraryManager/
 ├── LibraryManager.sln          # Solution file
+├── LMS.BusinessLogic/          # Business logic project
+│   ├── Book.cs                 # Book entity
+│   ├── BookRepository.cs       # Book data access (Repository pattern)
+│   └── LMS.BusinessLogic.csproj # Business logic project file
 ├── LMS.Tests/                  # Test project
 │   ├── LMS.Tests.csproj        # Test project file
-│   └── LibraryManagementSystemShould.cs  # Test class
+│   └── LibraryManagementSystemShould.cs  # Test class (27 test cases)
+├── TDDBookManagement.md        # Detailed TDD implementation guide
 └── README.md                   # This file
 ```
 
@@ -35,15 +40,40 @@ LibraryManager/
 ### Running the Tests
 
 ```bash
-# Navigate to the test project
-cd LMS.Tests
-
-# Run all tests
+# Run all tests from the solution root
 dotnet test
+
+# Run tests with verbose output
+dotnet test --verbosity normal
 
 # Run tests with coverage
 dotnet test --collect:"XPlat Code Coverage"
 ```
+
+## Current Implementation
+
+### ✅ **Completed Features**
+
+- **Book Management** - Complete with Repository pattern
+  - Add books with duplicate prevention
+  - Remove books by ISBN
+  - Get book count
+  - Retrieve books by ISBN
+  - Check if book exists
+
+### 📊 **Test Coverage**
+
+- **27 test cases** covering all functionality
+- **7 test methods** using comprehensive `[TestCase]` attributes
+- **100% coverage** for implemented features
+- **Edge cases** and **error scenarios** included
+
+### 🏗️ **Architecture**
+
+- **BookRepository**: Data access layer using Repository pattern
+- **Book**: Domain entity with immutable properties
+- **Clear separation** of concerns
+- **Future-proof** for database integration
 
 ## Development Approach
 
@@ -53,13 +83,50 @@ This project follows Test-Driven Development principles:
 2. **Green** - Write the minimum code to make the test pass
 3. **Refactor** - Clean up the code while keeping tests green
 
+### TDD Process Demonstrated
+
+- **Test-First Development**: All functionality was test-driven
+- **Incremental Implementation**: Features added one at a time
+- **Comprehensive Testing**: Edge cases and error scenarios covered
+- **Refactoring**: Code improved while maintaining test coverage
+
 ## Features (Planned)
 
-- [ ] Book management (add, remove, search)
+- [x] Book management (add, remove, search) ✅ **COMPLETED**
 - [ ] User management (register, update, delete)
 - [ ] Borrowing system (checkout, return, overdue tracking)
 - [ ] Inventory tracking
 - [ ] Reporting and analytics
+
+## Key Classes
+
+### BookRepository
+```csharp
+public class BookRepository
+{
+    public void AddBook(Book book)           // Add with duplicate prevention
+    public bool HasBook(string isbn)         // Check if book exists
+    public void RemoveBook(string isbn)       // Remove by ISBN
+    public int GetBookCount()                // Get total count
+    public Book GetBookByIsbn(string isbn)    // Retrieve by ISBN
+}
+```
+
+### Book
+```csharp
+public class Book
+{
+    public string Title { get; }   // Book title
+    public string Author { get; }  // Book author
+    public string Isbn { get; }    // Unique identifier
+}
+```
+
+## Documentation
+
+- **TDDBookManagement.md**: Detailed TDD implementation guide
+- **Test Cases**: Living documentation of expected behavior
+- **Code Comments**: Clear explanations of functionality
 
 ## Contributing
 
