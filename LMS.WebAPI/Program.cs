@@ -12,7 +12,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAngular",
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200") // Angular default port
+            policy.WithOrigins(
+                "http://localhost:4200", // Local development
+                "https://library-management-svc.onrender.com" // Production frontend
+            )
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
