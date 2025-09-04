@@ -11,6 +11,7 @@ LibraryManager/
 ├── LMS.Tests/                  # .NET Unit Tests (NUnit)
 ├── lms-angular/                # Angular Frontend Application
 ├── TDDBookManagement.md        # TDD Process Documentation
+├── DEPLOYMENT.md               # Docker & Render Deployment Guide
 └── README.md                   # Project Overview
 ```
 
@@ -32,6 +33,12 @@ LibraryManager/
 - **Router** - Client-side navigation
 - **Responsive Design** - Mobile-first approach
 
+### **DevOps & Deployment**
+- **Docker** - Containerization
+- **Docker Compose** - Multi-container orchestration
+- **Nginx** - Reverse proxy and static file serving
+- **Render** - Cloud deployment platform
+
 ### **Development Practices**
 - **Test-Driven Development (TDD)** - Red-Green-Refactor cycle
 - **Repository Pattern** - Data access abstraction
@@ -48,6 +55,7 @@ LibraryManager/
 - **Real-time Updates** - Live book count and list updates
 - **Error Handling** - Comprehensive error management
 - **API Documentation** - Swagger UI integration
+- **Containerization** - Docker-ready for deployment
 
 ### **📚 Book Management System**
 - **Add Books** - Create new book entries
@@ -78,8 +86,11 @@ LibraryManager/
 - **.NET 8.0 SDK** or later
 - **Node.js** and **npm**
 - **Angular CLI** (`npm install -g @angular/cli`)
+- **Docker Desktop** (for containerized deployment)
 
-### **Backend Setup**
+### **Option 1: Local Development**
+
+#### **Backend Setup**
 ```bash
 # Navigate to Web API directory
 cd LMS.WebAPI
@@ -90,7 +101,7 @@ dotnet run
 **API will be available at:** `http://localhost:5154`
 **Swagger UI:** `http://localhost:5154/swagger`
 
-### **Frontend Setup**
+#### **Frontend Setup**
 ```bash
 # Navigate to Angular directory
 cd lms-angular
@@ -103,10 +114,56 @@ ng serve
 ```
 **Frontend will be available at:** `http://localhost:4200`
 
-### **Running Both Applications**
-1. **Start Web API** in one PowerShell window
-2. **Start Angular** in another PowerShell window
-3. **Visit** `http://localhost:4200` to use the application
+### **Option 2: Docker Deployment (Recommended)**
+
+#### **Quick Start with Docker**
+```bash
+# Clone the repository
+git clone https://github.com/ryanegauthier/c-sharp-library-management-tdd.git
+cd c-sharp-library-management-tdd
+
+# Build and run with Docker Compose
+docker-compose up --build
+```
+
+#### **Access the Application**
+- **Frontend:** http://localhost
+- **Backend API:** http://localhost:5000
+- **Swagger UI:** http://localhost:5000/swagger
+
+#### **Docker Commands**
+```bash
+# Build images
+docker-compose build
+
+# Start services
+docker-compose up
+
+# Start in background
+docker-compose up -d
+
+# Stop services
+docker-compose down
+
+# View logs
+docker-compose logs
+```
+
+## ☁️ **Cloud Deployment**
+
+### **Render Deployment**
+This application is ready for deployment on Render with Docker support.
+
+#### **Deploy to Render:**
+1. **Connect your GitHub repository to Render**
+2. **Create a new Web Service:**
+   - **Name:** `lms-library-management`
+   - **Repository:** Your GitHub repo
+   - **Runtime:** `Docker`
+   - **Environment Variables:** `ASPNETCORE_ENVIRONMENT=Production`
+3. **Deploy!**
+
+For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## 📖 **API Endpoints**
 
@@ -134,6 +191,12 @@ ng serve
 - **Routing** - Client-side navigation
 - **Responsive Design** - Mobile-first approach
 
+### **Container Architecture**
+- **Multi-stage Docker builds** - Optimized production images
+- **Nginx reverse proxy** - API routing and static file serving
+- **Docker Compose** - Service orchestration
+- **Production-ready configuration** - Environment-specific settings
+
 ## 📚 **Documentation**
 
 ### **TDD Process**
@@ -146,6 +209,12 @@ ng serve
 - **Swagger UI** - Interactive API documentation
 - **OpenAPI Specification** - Machine-readable API docs
 - **Endpoint examples** and testing
+
+### **Deployment Documentation**
+- **DEPLOYMENT.md** - Complete deployment guide
+- **Docker configuration** and commands
+- **Render deployment** instructions
+- **Troubleshooting** and monitoring
 
 ## 🎨 **UI/UX Features**
 
@@ -175,21 +244,30 @@ ng serve
 1. **Backend API** development with TDD
 2. **Frontend integration** with Angular
 3. **End-to-end testing** and validation
-4. **Documentation** and deployment
+4. **Containerization** and deployment
 
-## 🚀 **Deployment Ready**
+## 🚀 **Production Ready**
 
 ### **Backend Deployment**
-- **Docker support** ready
-- **Environment configuration**
-- **Production settings**
+- **Docker containerization** ✅
+- **Environment configuration** ✅
+- **Production settings** ✅
 - **Database integration** ready
+- **Health checks** implemented
 
 ### **Frontend Deployment**
-- **Build optimization**
-- **Static file hosting** ready
-- **CDN integration** support
-- **PWA capabilities**
+- **Nginx serving** ✅
+- **Production build** optimization ✅
+- **Static file hosting** ✅
+- **API proxy** configuration ✅
+- **Gzip compression** ✅
+
+### **DevOps Features**
+- **Multi-container orchestration** ✅
+- **Environment-specific builds** ✅
+- **Logging and monitoring** ready
+- **Auto-scaling** capable
+- **CI/CD** ready
 
 ## 🎯 **Portfolio Highlights**
 
@@ -200,6 +278,7 @@ This project demonstrates:
 - **API design** and documentation
 - **Frontend development** with Angular
 - **Professional UI/UX** design
+- **Containerization** and cloud deployment
 - **Real-world application** development
 
 ## 📈 **Future Enhancements**
@@ -222,3 +301,5 @@ This project demonstrates:
 ---
 
 **Built with ❤️ using TDD principles and modern full-stack development practices.**
+
+**Ready for production deployment with Docker and Render!** 🐳☁️

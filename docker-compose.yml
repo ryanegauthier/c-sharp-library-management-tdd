@@ -1,0 +1,36 @@
+services:
+  # .NET Web API Backend
+  webapi:
+    build:
+      context: .
+      dockerfile: LMS.WebAPI/Dockerfile
+    container_name: lms-webapi
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+    networks:
+      - lms-network
+    restart: unless-stopped
+
+  # Angular Frontend
+  frontend:
+    build:
+      context: ./lms-angular
+      dockerfile: Dockerfile
+    container_name: lms-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - webapi
+    networks:
+      - lms-network
+    restart: unless-stopped
+
+networks:
+  lms-network:
+    driver: bridge
+
+volumes:
+  lms-data:
