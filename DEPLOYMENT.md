@@ -59,10 +59,10 @@ docker-compose up --build --force-recreate
    - **Name:** `lms-api`
    - **Repository:** Your GitHub repo
    - **Branch:** `master`
-   - **Root Directory:** `LMS.WebAPI`
+   - **Root Directory:** Leave empty (root)
    - **Runtime:** `Docker`
-   - **Build Command:** `docker build -t lms-webapi .`
-   - **Start Command:** `docker run -p $PORT:80 lms-webapi`
+   - **Dockerfile Path:** `./Dockerfile` (default)
+   - **Note:** Render automatically handles build and start commands when Dockerfile Path is specified
 
 #### Frontend Deployment
 3. **Create a new Static Site for Angular:**
@@ -98,8 +98,8 @@ docker-compose up --build --force-recreate
    - **Branch:** `master`
    - **Root Directory:** Leave empty (root)
    - **Runtime:** `Docker`
-   - **Build Command:** `docker-compose build`
-   - **Start Command:** `docker-compose up -d`
+   - **Dockerfile Path:** `./Dockerfile` (default)
+   - **Note:** For Docker Compose deployment, you may need to use Render's advanced settings or contact support
 
 2. **Environment Variables:**
    ```
