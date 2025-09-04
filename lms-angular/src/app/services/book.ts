@@ -8,7 +8,7 @@ import { Book } from '../models/book';
 })
 export class BookService {
   // Use relative URL for production deployment
-  private apiUrl = 'https://library-management-svc.onrender.com/api/books';
+  private apiUrl = 'https://library-management-api.onrender.com/api/books';
 
   constructor(private http: HttpClient) { }
 
