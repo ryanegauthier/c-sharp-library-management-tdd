@@ -1,0 +1,40 @@
+<div class="book-list-container">
+  <div class="header">
+    <h1>Library Management System</h1>
+    <div class="stats">
+      <span class="book-count">Total Books: {{ bookCount }}</span>
+    </div>
+    <a routerLink="/books/add" class="add-button">Add New Book</a>
+  </div>
+
+  <div class="content">
+    <div *ngIf="loading" class="loading">
+      <p>Loading books...</p>
+    </div>
+
+    <div *ngIf="error" class="error">
+      <p>{{ error }}</p>
+    </div>
+
+    <div *ngIf="!loading && !error && books.length === 0" class="empty-state">
+      <h2>No Books Found</h2>
+      <p>Start by adding your first book to the library.</p>
+      <a routerLink="/books/add" class="add-button">Add First Book</a>
+    </div>
+
+    <div *ngIf="!loading && !error && books.length > 0" class="books-grid">
+      <div *ngFor="let book of books" class="book-card">
+        <div class="book-info">
+          <h3 class="book-title">{{ book.title }}</h3>
+          <p class="book-author">by {{ book.author }}</p>
+          <p class="book-isbn">ISBN: {{ book.isbn }}</p>
+        </div>
+        <div class="book-actions">
+          <button (click)="deleteBook(book.isbn)" class="delete-button">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

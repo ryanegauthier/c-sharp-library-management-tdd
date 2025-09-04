@@ -39,5 +39,10 @@ namespace LMS.BusinessLogic
         {
             return _booklist.FirstOrDefault(b => b.Isbn == isbn);
         }
+
+        public IEnumerable<Book> GetAllBooks()
+        {
+            return _booklist.ToList();
+        }
     }
 }

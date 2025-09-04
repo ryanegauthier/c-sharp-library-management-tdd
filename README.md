@@ -1,137 +1,224 @@
-# C# Library Management System - TDD Approach
+# C# Library Management System - Full-Stack TDD Approach
 
-A Library Management System built in C# using Test-Driven Development (TDD) principles.
+A complete full-stack Library Management System built with **.NET Web API** backend and **Angular** frontend, following Test-Driven Development (TDD) principles.
 
-## Project Overview
-
-This project demonstrates building a Library Management System from scratch using TDD methodology. The goal is to create a robust, well-tested system for managing library operations including book management, user management, and borrowing/returning processes.
-
-## Technology Stack
-
-- **.NET 8.0**
-- **NUnit** for testing framework
-- **C#** as the primary language
-- **Test-Driven Development (TDD)** methodology
-
-## Project Structure
+## 🏗️ **Architecture Overview**
 
 ```
 LibraryManager/
-├── LibraryManager.sln          # Solution file
-├── LMS.BusinessLogic/          # Business logic project
-│   ├── Book.cs                 # Book entity
-│   ├── BookRepository.cs       # Book data access (Repository pattern)
-│   └── LMS.BusinessLogic.csproj # Business logic project file
-├── LMS.Tests/                  # Test project
-│   ├── LMS.Tests.csproj        # Test project file
-│   └── LibraryManagementSystemShould.cs  # Test class (27 test cases)
-├── TDDBookManagement.md        # Detailed TDD implementation guide
-└── README.md                   # This file
+├── LMS.BusinessLogic/          # .NET Business Logic Layer
+├── LMS.WebAPI/                 # .NET Web API (REST Backend)
+├── LMS.Tests/                  # .NET Unit Tests (NUnit)
+├── lms-angular/                # Angular Frontend Application
+├── TDDBookManagement.md        # TDD Process Documentation
+└── README.md                   # Project Overview
 ```
 
-## Getting Started
+## 🚀 **Tech Stack**
 
-### Prerequisites
+### **Backend (.NET)**
+- **.NET 8/9** - Modern .NET framework
+- **ASP.NET Core Web API** - RESTful API development
+- **NUnit** - Unit testing framework
+- **Swagger/OpenAPI** - API documentation
+- **CORS** - Cross-origin resource sharing
+- **Dependency Injection** - Service management
 
-- .NET 8.0 SDK
-- Visual Studio 2022 or VS Code
-- Git
+### **Frontend (Angular)**
+- **Angular 18** - Modern frontend framework
+- **TypeScript** - Type-safe JavaScript
+- **SCSS** - Advanced CSS styling
+- **HTTP Client** - API communication
+- **Router** - Client-side navigation
+- **Responsive Design** - Mobile-first approach
 
-### Running the Tests
+### **Development Practices**
+- **Test-Driven Development (TDD)** - Red-Green-Refactor cycle
+- **Repository Pattern** - Data access abstraction
+- **SOLID Principles** - Clean architecture
+- **Modern UI/UX** - Professional design
 
+## 🎯 **Features**
+
+### **✅ Completed Features**
+- **Book Management** - Full CRUD operations
+- **REST API** - Complete backend API
+- **Modern Frontend** - Responsive Angular application
+- **Data Persistence** - In-memory storage with singleton pattern
+- **Real-time Updates** - Live book count and list updates
+- **Error Handling** - Comprehensive error management
+- **API Documentation** - Swagger UI integration
+
+### **📚 Book Management System**
+- **Add Books** - Create new book entries
+- **View Books** - Display all books in responsive grid
+- **Delete Books** - Remove books with confirmation
+- **Book Count** - Real-time total book display
+- **Duplicate Prevention** - ISBN-based uniqueness
+- **Form Validation** - Client and server-side validation
+
+## 🧪 **Testing**
+
+### **Backend Testing**
+- **27 Test Cases** covering all functionality
+- **Data-driven Testing** with `[TestCase]` attributes
+- **Edge Cases** and error scenarios
+- **100% Coverage** for implemented features
+
+### **Test Categories**
+- Book addition and validation
+- Book removal and existence checks
+- Book retrieval and counting
+- Duplicate prevention
+- Error handling scenarios
+
+## 🚀 **Getting Started**
+
+### **Prerequisites**
+- **.NET 8.0 SDK** or later
+- **Node.js** and **npm**
+- **Angular CLI** (`npm install -g @angular/cli`)
+
+### **Backend Setup**
 ```bash
-# Run all tests from the solution root
-dotnet test
+# Navigate to Web API directory
+cd LMS.WebAPI
 
-# Run tests with verbose output
-dotnet test --verbosity normal
-
-# Run tests with coverage
-dotnet test --collect:"XPlat Code Coverage"
+# Run the API
+dotnet run
 ```
+**API will be available at:** `http://localhost:5154`
+**Swagger UI:** `http://localhost:5154/swagger`
 
-## Current Implementation
+### **Frontend Setup**
+```bash
+# Navigate to Angular directory
+cd lms-angular
 
-### ✅ **Completed Features**
+# Install dependencies (if needed)
+npm install
 
-- **Book Management** - Complete with Repository pattern
-  - Add books with duplicate prevention
-  - Remove books by ISBN
-  - Get book count
-  - Retrieve books by ISBN
-  - Check if book exists
-
-### 📊 **Test Coverage**
-
-- **27 test cases** covering all functionality
-- **7 test methods** using comprehensive `[TestCase]` attributes
-- **100% coverage** for implemented features
-- **Edge cases** and **error scenarios** included
-
-### 🏗️ **Architecture**
-
-- **BookRepository**: Data access layer using Repository pattern
-- **Book**: Domain entity with immutable properties
-- **Clear separation** of concerns
-- **Future-proof** for database integration
-
-## Development Approach
-
-This project follows Test-Driven Development principles:
-
-1. **Red** - Write a failing test
-2. **Green** - Write the minimum code to make the test pass
-3. **Refactor** - Clean up the code while keeping tests green
-
-### TDD Process Demonstrated
-
-- **Test-First Development**: All functionality was test-driven
-- **Incremental Implementation**: Features added one at a time
-- **Comprehensive Testing**: Edge cases and error scenarios covered
-- **Refactoring**: Code improved while maintaining test coverage
-
-## Features (Planned)
-
-- [x] Book management (add, remove, search) ✅ **COMPLETED**
-- [ ] User management (register, update, delete)
-- [ ] Borrowing system (checkout, return, overdue tracking)
-- [ ] Inventory tracking
-- [ ] Reporting and analytics
-
-## Key Classes
-
-### BookRepository
-```csharp
-public class BookRepository
-{
-    public void AddBook(Book book)           // Add with duplicate prevention
-    public bool HasBook(string isbn)         // Check if book exists
-    public void RemoveBook(string isbn)       // Remove by ISBN
-    public int GetBookCount()                // Get total count
-    public Book GetBookByIsbn(string isbn)    // Retrieve by ISBN
-}
+# Run the Angular app
+ng serve
 ```
+**Frontend will be available at:** `http://localhost:4200`
 
-### Book
-```csharp
-public class Book
-{
-    public string Title { get; }   // Book title
-    public string Author { get; }  // Book author
-    public string Isbn { get; }    // Unique identifier
-}
-```
+### **Running Both Applications**
+1. **Start Web API** in one PowerShell window
+2. **Start Angular** in another PowerShell window
+3. **Visit** `http://localhost:4200` to use the application
 
-## Documentation
+## 📖 **API Endpoints**
 
-- **TDDBookManagement.md**: Detailed TDD implementation guide
-- **Test Cases**: Living documentation of expected behavior
-- **Code Comments**: Clear explanations of functionality
+### **Books API (`/api/books`)**
+- `GET /api/books` - Get all books
+- `GET /api/books/{isbn}` - Get book by ISBN
+- `POST /api/books` - Create new book
+- `DELETE /api/books/{isbn}` - Delete book by ISBN
+- `GET /api/books/count` - Get total book count
+- `GET /api/books/exists/{isbn}` - Check if book exists
 
-## Contributing
+## 🏗️ **Architecture Details**
 
-This is a learning project focused on TDD practices. Feel free to explore the code and learn from the implementation approach.
+### **Backend Architecture**
+- **Controllers** - REST API endpoints
+- **Services** - Business logic layer
+- **Repository Pattern** - Data access abstraction
+- **Dependency Injection** - Service management
+- **CORS Configuration** - Frontend integration
 
-## License
+### **Frontend Architecture**
+- **Components** - Reusable UI components
+- **Services** - HTTP communication layer
+- **Models** - TypeScript interfaces
+- **Routing** - Client-side navigation
+- **Responsive Design** - Mobile-first approach
 
-This project is open source and available under the MIT License.
+## 📚 **Documentation**
+
+### **TDD Process**
+- **TDDBookManagement.md** - Complete TDD implementation guide
+- **Red-Green-Refactor** cycle documentation
+- **Test case evolution** and refinement
+- **Architecture improvements** and refactoring
+
+### **API Documentation**
+- **Swagger UI** - Interactive API documentation
+- **OpenAPI Specification** - Machine-readable API docs
+- **Endpoint examples** and testing
+
+## 🎨 **UI/UX Features**
+
+### **Modern Design**
+- **Clean, professional interface**
+- **Responsive grid layout**
+- **Hover effects and animations**
+- **Color-coded status indicators**
+- **Mobile-friendly design**
+
+### **User Experience**
+- **Intuitive navigation**
+- **Form validation feedback**
+- **Loading states**
+- **Error message handling**
+- **Success confirmations**
+
+## 🔧 **Development Workflow**
+
+### **TDD Cycle**
+1. **Write failing tests** (Red)
+2. **Implement minimal code** (Green)
+3. **Refactor and improve** (Refactor)
+4. **Repeat for new features**
+
+### **Full-Stack Development**
+1. **Backend API** development with TDD
+2. **Frontend integration** with Angular
+3. **End-to-end testing** and validation
+4. **Documentation** and deployment
+
+## 🚀 **Deployment Ready**
+
+### **Backend Deployment**
+- **Docker support** ready
+- **Environment configuration**
+- **Production settings**
+- **Database integration** ready
+
+### **Frontend Deployment**
+- **Build optimization**
+- **Static file hosting** ready
+- **CDN integration** support
+- **PWA capabilities**
+
+## 🎯 **Portfolio Highlights**
+
+This project demonstrates:
+- **Full-stack development** skills
+- **TDD implementation** and best practices
+- **Modern architecture** patterns
+- **API design** and documentation
+- **Frontend development** with Angular
+- **Professional UI/UX** design
+- **Real-world application** development
+
+## 📈 **Future Enhancements**
+
+### **Planned Features**
+- **Database Integration** - SQL Server/PostgreSQL
+- **User Authentication** - JWT tokens
+- **Advanced Search** - Book filtering and sorting
+- **Book Categories** - Genre and classification
+- **Borrowing System** - Check-in/check-out
+- **User Management** - Admin and user roles
+
+### **Technical Improvements**
+- **Caching** - Redis integration
+- **Logging** - Structured logging
+- **Monitoring** - Application insights
+- **CI/CD** - Automated deployment
+- **Performance** - Optimization and scaling
+
+---
+
+**Built with ❤️ using TDD principles and modern full-stack development practices.**
