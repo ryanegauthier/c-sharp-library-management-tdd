@@ -50,41 +50,61 @@ docker-compose up --build --force-recreate
 
 ## ☁️ Render Deployment
 
-### Option 1: Deploy as Web Service (Recommended)
+### Option 1: Deploy API as Web Service + Frontend as Static Site (Recommended)
 
+#### Backend API Deployment
 1. **Connect your GitHub repository to Render**
 
-2. **Create a new Web Service:**
-   - **Name:** `lms-library-management`
+2. **Create a new Web Service for the API:**
+   - **Name:** `lms-api`
    - **Repository:** Your GitHub repo
    - **Branch:** `master`
-   - **Root Directory:** Leave empty (root)
+   - **Root Directory:** `LMS.WebAPI`
    - **Runtime:** `Docker`
-   - **Build Command:** Leave empty (uses Dockerfile)
-   - **Start Command:** Leave empty (uses Dockerfile)
+   - **Build Command:** `docker build -t lms-webapi .`
+   - **Start Command:** `docker run -p $PORT:80 lms-webapi`
 
-3. **Environment Variables:**
+#### Frontend Deployment
+3. **Create a new Static Site for Angular:**
+   - **Name:** `lms-frontend`
+   - **Repository:** Your GitHub repo
+   - **Branch:** `master`
+   - **Root Directory:** `lms-angular`
+   - **Build Command:** `npm install && npm run build`
+   - **Publish Directory:** `dist/lms-angular/browser`
+
+3. **Environment Variables for API:**
    ```
    ASPNETCORE_ENVIRONMENT=Production
    ```
 
-4. **Deploy!**
+4. **Deploy the API!**
 
-### Option 2: Deploy Frontend and Backend Separately
+5. **Update Frontend API URL:**
+   After the API is deployed, update the API URL in `lms-angular/src/app/services/book.ts`:
+   ```typescript
+   private apiUrl = 'https://your-api-url.onrender.com/api/books';
+   ```
 
-#### Backend Deployment
-1. **Create a new Web Service for the API:**
-   - **Name:** `lms-api`
-   - **Root Directory:** `LMS.WebAPI`
+6. **Deploy the Frontend!**
+
+### Option 2: Deploy as Single Web Service with Docker Compose
+
+**Note:** This option requires Render's Docker Compose support (if available) or manual configuration.
+
+1. **Create a new Web Service:**
+   - **Name:** `lms-fullstack`
+   - **Repository:** Your GitHub repo
+   - **Branch:** `master`
+   - **Root Directory:** Leave empty (root)
    - **Runtime:** `Docker`
-   - **Dockerfile Path:** `LMS.WebAPI/Dockerfile`
+   - **Build Command:** `docker-compose build`
+   - **Start Command:** `docker-compose up -d`
 
-#### Frontend Deployment
-1. **Create a new Static Site for Angular:**
-   - **Name:** `lms-frontend`
-   - **Root Directory:** `lms-angular`
-   - **Build Command:** `npm install && npm run build`
-   - **Publish Directory:** `dist/lms-angular/browser`
+2. **Environment Variables:**
+   ```
+   ASPNETCORE_ENVIRONMENT=Production
+   ```
 
 ## 🔧 Configuration
 
@@ -101,6 +121,11 @@ The frontend automatically uses relative URLs for API calls in production.
 
 ### Port Configuration
 
+#### Option 1 (Separate Services):
+- **Frontend:** Static site (no port needed)
+- **Backend:** Port 80 (Render assigns external port)
+
+#### Option 2 (Docker Compose):
 - **Frontend:** Port 80 (default)
 - **Backend:** Port 5000 (internal), proxied through nginx
 
